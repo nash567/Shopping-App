@@ -34,8 +34,31 @@ class CartItem extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
       ),
       direction: DismissDirection.endToStart,
+      confirmDismiss: (direction) {
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Text('Are You Sure ?'),
+                  content: Text('Do u want to remove Item from Cart'),
+                  actions: [
+                    FlatButton(
+                      child: Text('No'),
+                      onPressed: () {
+                        Navigator.of(ctx).pop(false);
+                      },
+                    ),
+                    FlatButton(
+                      child: Text('Yes'),
+                      onPressed: () {
+                        Navigator.of(ctx).pop(true);
+                      },
+                    )
+                  ],
+                ));
+      },
       onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productId);
+        Provider.of<Cart>(context, listen: false).removeItem(
+            productId); // without setting listener to false it gives error.
       },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),

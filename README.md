@@ -14,3 +14,34 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+///////////////////////////////////
+
+## Widgets To Work With Text Input or Form input 
+
+Form Widget is a special widget Which is invisible but inside it we can use special input widget.Which can be submitted or validated together..
+
+- Form(
+        child: ListView(
+          children: [TextFormField()],
+        ),
+      )
+
+## TextFormFiels
+
+
+they are internally connected by our form.
+
+- TextFormField(
+
+### Hidden text or placeholder
+
+
+                decoration: InputDecoration(labelText: 'Title'), 
+                textInputAction: TextInputAction.next,  
+
+### This will make the bottom left of keybard to go to next field
+
+              ),
