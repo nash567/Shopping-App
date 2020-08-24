@@ -10,7 +10,8 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(
-        context); //only a particular product i avilableat specified index..
+      context,
+    ); //only a particular product i avilableat specified index..
 
     final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
