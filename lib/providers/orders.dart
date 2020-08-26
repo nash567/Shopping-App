@@ -23,8 +23,14 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  final String authToken;
+  final String userId;
+
+  Orders(this.authToken, this._orders, this.userId);
+
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    const url = 'https://flutter-shopping-app-51497.firebaseio.com/orders.json';
+    final url =
+        'https://flutter-shopping-app-51497.firebaseio.com/orders/$userId.json?auth=$authToken';
     final timeStamp = DateTime.now();
     try {
       final response = await http.post(
@@ -32,7 +38,7 @@ class Orders with ChangeNotifier {
         body: json.encode(
           {
             'amount': total,
-            'dataTime': timeStamp.toIso8601String(),
+            'dateTime': timeStamp.toIso8601String(),
             'products': cartProducts
                 .map(
                   (cp) => {
@@ -46,6 +52,7 @@ class Orders with ChangeNotifier {
           },
         ),
       );
+
       _orders.insert(
           0,
           OrderItem(
@@ -62,12 +69,14 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetorders() async {
-    const url = 'https://flutter-shopping-app-51497.firebaseio.com/orders.json';
+    final url =
+        'https://flutter-shopping-app-51497.firebaseio.com/orders/$userId.json?auth=$authToken';
     List<OrderItem> _loadedorders = [];
 
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+
       if (extractedData == null) {
         return;
       }
@@ -94,7 +103,10 @@ class Orders with ChangeNotifier {
       });
 
       _orders = _loadedorders.reversed.toList();
+      print(_orders);
       notifyListeners();
-    } catch (err) {}
+    } catch (err) {
+      print(err);
+    }
   }
 }

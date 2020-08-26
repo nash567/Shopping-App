@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/cart.dart';
 import '../providers/products.dart';
+import '../providers/auth.dart';
 
 import '../screens/product_detail_screen.dart';
 
@@ -14,6 +15,7 @@ class ProductItem extends StatelessWidget {
     ); //only a particular product i avilableat specified index..
 
     final cart = Provider.of<Cart>(context, listen: false);
+    final authData = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -34,7 +36,8 @@ class ProductItem extends StatelessWidget {
             ),
             color: Theme.of(context).accentColor,
             onPressed: () {
-              product.toggleFavouriteStatus();
+              print('hi..');
+              product.toggleFavouriteStatus(authData.token, authData.userId);
             },
           ),
           title: Text(
