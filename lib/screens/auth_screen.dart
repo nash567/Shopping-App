@@ -180,7 +180,7 @@ class _AuthCardState extends State<AuthCard>
         );
       } else {
         // Sign user up
-        print('$_authData');
+
         await Provider.of<Auth>(context, listen: false).signup(
           _authData['email'],
           _authData['password'],

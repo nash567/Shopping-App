@@ -115,11 +115,10 @@ class Products with ChangeNotifier {
       final response = await http.get(url);
 
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      print(extractedData);
+
       if (extractedData == null) {
         return;
       }
-      print(userId);
 
       url =
           'https://flutter-shopping-app-51497.firebaseio.com/userFavourites/$userId.json?auth=$authToken';

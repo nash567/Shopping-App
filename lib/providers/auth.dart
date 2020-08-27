@@ -34,18 +34,10 @@ class Auth with ChangeNotifier {
 
   Future<void> _authenticate(
       String urlSegment, String email, String password) async {
-    print(password);
-    print(urlSegment);
-
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAt_jJ1VipuSs7YembG-19cMtzJUOGRCyY';
-    print(password);
-    print(email);
 
     try {
-      print(password);
-      print(email);
-
       final response = await http.post(url,
           body: json.encode({
             'email': email,
@@ -54,10 +46,8 @@ class Auth with ChangeNotifier {
           }));
 
       final responseData = json.decode(response.body);
-      print(responseData);
 
       if (responseData['error'] != null) {
-        print('error printing');
         print(
           responseData['error'],
         );
@@ -91,7 +81,7 @@ class Auth with ChangeNotifier {
 
       prefs.setString('userData', userData);
     } catch (err) {
-      print('err' + err);
+      print(err);
       throw err;
     }
   }
