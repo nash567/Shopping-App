@@ -123,10 +123,8 @@ class Products with ChangeNotifier {
       url =
           'https://flutter-shopping-app-51497.firebaseio.com/userFavourites/$userId.json?auth=$authToken';
       final favouriteResponse = await http.get(url);
-      print(favouriteResponse);
 
       final favouriteData = json.decode(favouriteResponse.body);
-      print(favouriteData);
 
       final List<Product> loadedProduct = [];
       extractedData.forEach((prodID, prodData) {
